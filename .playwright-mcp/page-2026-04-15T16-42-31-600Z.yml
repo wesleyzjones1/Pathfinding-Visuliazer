@@ -1,0 +1,41 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Start" [ref=e6] [cursor=pointer]: Start
+        - button "End" [ref=e7] [cursor=pointer]: End
+        - button "Wall" [ref=e8] [cursor=pointer]: Wall
+        - generic [ref=e9]:
+          - generic [ref=e10]: Algorithm
+          - combobox "Algorithm" [ref=e11] [cursor=pointer]:
+            - option "A*" [selected]
+            - option "Dijkstra"
+            - option "BFS"
+            - option "DFS"
+            - option "Greedy"
+            - option "Bidirectional"
+            - option "Jump Point Search"
+            - option "IDDFS"
+            - option "Best-First"
+            - option "Theta*"
+      - generic [ref=e12]:
+        - button "▶ Run" [ref=e13] [cursor=pointer]
+        - button "↻ Reset" [ref=e14] [cursor=pointer]
+        - generic [ref=e15]:
+          - generic [ref=e16]: Speed
+          - slider "Speed" [ref=e17] [cursor=pointer]: "0.101"
+          - generic [ref=e18]: "0.10"
+    - generic [ref=e19]:
+      - heading "◇ Pathfinding Visualizer" [level=1] [ref=e20]
+      - paragraph [ref=e21]: 10 algorithms · interactive grid · real-time visualization
+    - generic [ref=e22]:
+      - generic [ref=e23]:
+        - heading "A* (A-Star)" [level=3] [ref=e24]
+        - paragraph [ref=e25]: Uses both distance traveled and estimated distance to goal. Finds the shortest path efficiently by prioritizing promising routes.
+      - generic [ref=e26]:
+        - heading "Statistics" [level=3] [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e29]: Iterations0
+          - generic [ref=e30]: Path Length0
+          - generic [ref=e31]: Time0ms
+  - main [ref=e32]

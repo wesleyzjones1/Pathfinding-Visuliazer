@@ -1,0 +1,56 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Start" [ref=e6] [cursor=pointer]: Start
+        - button "End" [ref=e8] [cursor=pointer]: End
+        - button "Wall" [ref=e10] [cursor=pointer]: Wall
+        - generic [ref=e12]:
+          - generic [ref=e13]: Algorithm
+          - combobox "Algorithm" [ref=e14] [cursor=pointer]:
+            - option "A*" [selected]
+            - option "Dijkstra"
+            - option "BFS"
+            - option "DFS"
+            - option "Greedy"
+            - option "Bidirectional"
+            - option "Jump Point Search"
+            - option "IDDFS"
+            - option "Best-First"
+            - option "Theta*"
+      - generic [ref=e15]:
+        - button "▶ Run" [ref=e16] [cursor=pointer]
+        - button "↻ Reset" [ref=e17] [cursor=pointer]
+        - generic [ref=e18]:
+          - generic [ref=e19]: Speed
+          - slider "Speed" [ref=e20] [cursor=pointer]: "100"
+        - generic "Toggle light/dark mode" [ref=e21] [cursor=pointer]:
+          - generic [ref=e22]:
+            - generic [ref=e23]: ☼
+            - generic [ref=e24]: ☾
+      - generic [ref=e26]:
+        - generic [ref=e27]: Presets
+        - button "▦ Maze" [ref=e28] [cursor=pointer]
+        - button "⟲ Spiral" [ref=e29] [cursor=pointer]
+        - button "◻ Fortress" [ref=e30] [cursor=pointer]
+        - button "⦿ Scatter" [active] [ref=e31] [cursor=pointer]
+    - heading "◇ Pathfinding Visualizer" [level=1] [ref=e33]:
+      - generic [ref=e34]: ◇
+      - text: Pathfinding Visualizer
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - heading "A* (A-Star)" [level=3] [ref=e37]
+        - paragraph [ref=e38]: Uses both distance traveled and estimated distance to goal. Finds the shortest path efficiently by prioritizing promising routes.
+      - generic [ref=e39]:
+        - heading "Statistics" [level=3] [ref=e40]
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: Iterations
+            - generic [ref=e44]: "0"
+          - generic [ref=e45]:
+            - generic [ref=e46]: Path Length
+            - generic [ref=e47]: "0"
+          - generic [ref=e48]:
+            - generic [ref=e49]: Time
+            - generic [ref=e50]: 0ms
+  - main [ref=e51]

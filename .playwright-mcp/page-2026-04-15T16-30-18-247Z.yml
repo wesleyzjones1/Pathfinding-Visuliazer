@@ -1,0 +1,47 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Start" [ref=e6] [cursor=pointer]
+        - button "End" [ref=e7] [cursor=pointer]
+        - button "Wall" [ref=e8] [cursor=pointer]
+        - generic [ref=e9]:
+          - generic [ref=e10]: Algorithm
+          - combobox "Algorithm" [ref=e11] [cursor=pointer]:
+            - option "A*" [selected]
+            - option "Dijkstra"
+            - option "BFS"
+            - option "DFS"
+            - option "Greedy"
+            - option "Bidirectional"
+            - option "Jump Point Search"
+            - option "IDDFS"
+            - option "Best-First"
+            - option "Theta*"
+      - generic [ref=e12]:
+        - button "Run" [active] [ref=e13] [cursor=pointer]
+        - button "Reset" [ref=e14] [cursor=pointer]
+        - generic [ref=e15]:
+          - generic [ref=e16]: Speed
+          - slider "Speed" [ref=e17] [cursor=pointer]: "0.001"
+          - generic [ref=e18]: "0.00"
+    - heading "Pathfinding Visualizer" [level=1] [ref=e20]
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - heading "A* (A-Star)" [level=3] [ref=e23]
+        - paragraph [ref=e24]: Uses both distance traveled and estimated distance to goal. Finds the shortest path efficiently by prioritizing promising routes.
+      - generic [ref=e25]:
+        - heading "Statistics" [level=3] [ref=e26]
+        - generic [ref=e27]:
+          - paragraph [ref=e28]:
+            - strong [ref=e29]: "Iterations:"
+            - text: "0"
+          - paragraph [ref=e30]:
+            - strong [ref=e31]: "Path Length:"
+            - text: "0"
+          - paragraph [ref=e32]:
+            - strong [ref=e33]: "Time:"
+            - text: 0ms
+  - separator [ref=e34]
+  - main [ref=e35]
+  - generic: Select start and end first.

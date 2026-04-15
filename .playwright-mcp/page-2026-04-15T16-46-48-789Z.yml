@@ -1,0 +1,50 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Start" [ref=e6] [cursor=pointer]: Start
+        - button "End" [ref=e8] [cursor=pointer]: End
+        - button "Wall" [ref=e10] [cursor=pointer]: Wall
+        - generic [ref=e12]:
+          - generic [ref=e13]: Algorithm
+          - combobox "Algorithm" [ref=e14] [cursor=pointer]:
+            - option "A*"
+            - option "Dijkstra" [selected]
+            - option "BFS"
+            - option "DFS"
+            - option "Greedy"
+            - option "Bidirectional"
+            - option "Jump Point Search"
+            - option "IDDFS"
+            - option "Best-First"
+            - option "Theta*"
+      - generic [ref=e15]:
+        - button "▶ Run" [active] [ref=e16] [cursor=pointer]
+        - button "↻ Reset" [ref=e17] [cursor=pointer]
+        - generic [ref=e18]:
+          - generic [ref=e19]: Speed
+          - slider "Speed" [ref=e20] [cursor=pointer]: "0.101"
+          - generic [ref=e21]: "0.10"
+    - generic [ref=e22]:
+      - heading "◇ Pathfinding Visualizer" [level=1] [ref=e23]:
+        - generic [ref=e24]: ◇
+        - text: Pathfinding Visualizer
+      - paragraph [ref=e25]: 10 algorithms · interactive grid · real-time visualization
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "Dijkstra's Algorithm" [level=3] [ref=e520]
+        - paragraph [ref=e29]: Explores all directions equally, guaranteeing the shortest path. More thorough but slower than A* when a clear goal exists.
+      - generic [ref=e30]:
+        - heading "Statistics" [level=3] [ref=e31]
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Iterations
+            - generic [ref=e35]: "0"
+          - generic [ref=e36]:
+            - generic [ref=e37]: Path Length
+            - generic [ref=e38]: "0"
+          - generic [ref=e39]:
+            - generic [ref=e40]: Time
+            - generic [ref=e41]: 0ms
+  - main [ref=e42]
+  - generic: Select start and end first.

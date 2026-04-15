@@ -1,0 +1,221 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - button "Start" [ref=e6] [cursor=pointer]: Start
+        - button "End" [ref=e8] [cursor=pointer]: End
+        - button "Wall" [ref=e10] [cursor=pointer]: Wall
+        - generic [ref=e12]:
+          - generic [ref=e13]: Algorithm
+          - combobox "Algorithm" [ref=e14] [cursor=pointer]:
+            - option "A*" [selected]
+            - option "Dijkstra"
+            - option "BFS"
+            - option "DFS"
+            - option "Greedy"
+            - option "Bidirectional"
+            - option "Jump Point Search"
+            - option "IDDFS"
+            - option "Best-First"
+            - option "Theta*"
+      - generic [ref=e15]:
+        - button "▶ Run" [disabled]
+        - button "↻ Reset" [ref=e17] [cursor=pointer]
+        - generic [ref=e18]:
+          - generic [ref=e19]: Speed
+          - slider "Speed" [ref=e20] [cursor=pointer]: "0.001"
+          - generic [ref=e21]: "0.00"
+    - generic [ref=e22]:
+      - heading "◇ Pathfinding Visualizer" [level=1] [ref=e23]:
+        - generic [ref=e24]: ◇
+        - text: Pathfinding Visualizer
+      - paragraph [ref=e25]: 10 algorithms · interactive grid · real-time visualization
+    - generic [ref=e26]:
+      - generic [ref=e27]:
+        - heading "A* (A-Star)" [level=3] [ref=e28]
+        - paragraph [ref=e29]: Uses both distance traveled and estimated distance to goal. Finds the shortest path efficiently by prioritizing promising routes.
+      - generic [ref=e30]:
+        - heading "Statistics" [level=3] [ref=e31]
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - generic [ref=e34]: Iterations
+            - generic [ref=e35]: "63"
+          - generic [ref=e36]:
+            - generic [ref=e37]: Path Length
+            - generic [ref=e38]: "0"
+          - generic [ref=e39]:
+            - generic [ref=e40]: Time
+            - generic [ref=e41]: 1.02s
+  - main [ref=e42]:
+    - generic [ref=e43]:
+      - generic [ref=e47]:
+        - generic: "23"
+      - generic [ref=e77]:
+        - generic: "23"
+      - generic [ref=e78]:
+        - generic: "21"
+      - generic [ref=e79]:
+        - generic: "21"
+      - generic [ref=e80]:
+        - generic: "21"
+      - generic [ref=e81]:
+        - generic: "21"
+      - generic [ref=e82]:
+        - generic: "21"
+      - generic [ref=e83]:
+        - generic: "21"
+      - generic [ref=e84]:
+        - generic: "21"
+      - generic [ref=e108]:
+        - generic: "21"
+      - generic [ref=e109]:
+        - generic: "19"
+      - generic [ref=e110]:
+        - generic: "19"
+      - generic [ref=e111]:
+        - generic: "19"
+      - generic [ref=e112]:
+        - generic: "19"
+      - generic [ref=e113]:
+        - generic: "19"
+      - generic [ref=e114]:
+        - generic: "19"
+      - generic [ref=e115]:
+        - generic: "19"
+      - generic [ref=e138]:
+        - generic: "21"
+      - generic [ref=e139]:
+        - generic: "19"
+      - generic [ref=e141]:
+        - generic: "17"
+      - generic [ref=e142]:
+        - generic: "17"
+      - generic [ref=e143]:
+        - generic: "17"
+      - generic [ref=e144]:
+        - generic: "17"
+      - generic [ref=e145]:
+        - generic: "17"
+      - generic [ref=e146]:
+        - generic: "17"
+      - generic [ref=e169]:
+        - generic: "21"
+      - generic [ref=e170]:
+        - generic: "19"
+      - generic [ref=e171]:
+        - generic: "17"
+      - generic [ref=e172]:
+        - generic: "17"
+      - generic [ref=e173]:
+        - generic: "17"
+      - generic [ref=e174]:
+        - generic: "17"
+      - generic [ref=e175]:
+        - generic: "17"
+      - generic [ref=e176]:
+        - generic: "17"
+      - generic [ref=e177]:
+        - generic: "17"
+      - generic [ref=e200]:
+        - generic: "21"
+      - generic [ref=e201]:
+        - generic: "19"
+      - generic [ref=e202]:
+        - generic: "17"
+      - generic [ref=e203]:
+        - generic: "17"
+      - generic [ref=e204]:
+        - generic: "17"
+      - generic [ref=e205]:
+        - generic: "17"
+      - generic [ref=e206]:
+        - generic: "17"
+      - generic [ref=e207]:
+        - generic: "17"
+      - generic [ref=e208]:
+        - generic: "17"
+      - generic [ref=e231]:
+        - generic: "21"
+      - generic [ref=e232]:
+        - generic: "19"
+      - generic [ref=e233]:
+        - generic: "17"
+      - generic [ref=e234]:
+        - generic: "17"
+      - generic [ref=e235]:
+        - generic: "17"
+      - generic [ref=e236]:
+        - generic: "17"
+      - generic [ref=e237]:
+        - generic: "17"
+      - generic [ref=e238]:
+        - generic: "17"
+      - generic [ref=e239]:
+        - generic: "17"
+      - generic [ref=e262]:
+        - generic: "21"
+      - generic [ref=e263]:
+        - generic: "19"
+      - generic [ref=e264]:
+        - generic: "17"
+      - generic [ref=e265]:
+        - generic: "17"
+      - generic [ref=e266]:
+        - generic: "17"
+      - generic [ref=e267]:
+        - generic: "17"
+      - generic [ref=e268]:
+        - generic: "17"
+      - generic [ref=e269]:
+        - generic: "17"
+      - generic [ref=e270]:
+        - generic: "17"
+      - generic [ref=e293]:
+        - generic: "21"
+      - generic [ref=e294]:
+        - generic: "19"
+      - generic [ref=e295]:
+        - generic: "17"
+      - generic [ref=e296]:
+        - generic: "17"
+      - generic [ref=e297]:
+        - generic: "17"
+      - generic [ref=e298]:
+        - generic: "17"
+      - generic [ref=e299]:
+        - generic: "17"
+      - generic [ref=e300]:
+        - generic: "17"
+      - generic [ref=e301]:
+        - generic: "17"
+      - generic [ref=e325]:
+        - generic: "21"
+      - generic [ref=e326]:
+        - generic: "19"
+      - generic [ref=e327]:
+        - generic: "19"
+      - generic [ref=e328]:
+        - generic: "19"
+      - generic [ref=e329]:
+        - generic: "19"
+      - generic [ref=e330]:
+        - generic: "19"
+      - generic [ref=e331]:
+        - generic: "19"
+      - generic [ref=e332]:
+        - generic: "19"
+      - generic [ref=e357]:
+        - generic: "21"
+      - generic [ref=e358]:
+        - generic: "21"
+      - generic [ref=e359]:
+        - generic: "21"
+      - generic [ref=e360]:
+        - generic: "21"
+      - generic [ref=e361]:
+        - generic: "21"
+      - generic [ref=e362]:
+        - generic: "21"
+      - generic [ref=e363]:
+        - generic: "21"
+  - generic: Running...

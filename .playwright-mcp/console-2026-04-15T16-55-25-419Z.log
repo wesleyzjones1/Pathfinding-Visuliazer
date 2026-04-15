@@ -1,0 +1,3 @@
+[      26ms] TypeError: Cannot set properties of null (setting 'textContent')
+    at updateSpeedLabel (http://localhost:8080/app.js:117:24)
+    at http://localhost:8080/app.js:119:1
