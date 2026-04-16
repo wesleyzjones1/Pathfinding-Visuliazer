@@ -7,9 +7,7 @@ Draw walls, place a start and end node, choose an algorithm, and watch it search
 ---
 
 ## Live Demo
-
-> _Deploy to GitHub Pages and replace this line with your URL._
-
+https://wesleyzjones1.github.io/Pathfinding-Visuliazer/
 ---
 
 ## Screenshots
