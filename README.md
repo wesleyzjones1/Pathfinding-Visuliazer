@@ -14,9 +14,9 @@ Draw walls, place a start and end node, choose an algorithm, and watch it search
 
 ## Screenshots
 
-| A\* on open grid | A\* through a maze | Greedy search |
+| A\* through a maze | Greedy search | Greedy maze |
 |---|---|---|
-| ![A*](photos/aStar.png) | ![A* Maze](photos/aStarMaze.png) | ![Greedy](photos/greedySearch.png) |
+| ![A* Maze](photos/aStarMaze.png) | ![Greedy](photos/greedySearch.png) | ![Greedy Maze](photos/greedyMaze.png) |
 
 | Algorithm running | Theta\* spiral | Greedy spiral |
 |---|---|---|
