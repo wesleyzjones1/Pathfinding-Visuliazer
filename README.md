@@ -11,11 +11,13 @@ Add your deployed URL here:
 
 ## Screenshots
 
-Replace the paths below with your own images.
+Here are a few screenshots from the app (also available in the `photos/` folder):
 
-![Main UI](docs/images/main-ui.png)
-![Algorithm In Progress](docs/images/algorithm-running.png)
-![Path Result](docs/images/path-result.png)
+![Main UI](photos/aStar.png)
+![Maze Preset](photos/aStarMaze.png)
+![Algorithm Running](photos/aStarSearchMaze.png)
+![Greedy Search Example](photos/greedySearch.png)
+![Theta* Spiral](photos/thetaSpiral.png)
 
 ## Features
 
@@ -26,6 +28,17 @@ Replace the paths below with your own images.
 - Preset generators (maze, spiral, fortress, scatter).
 - Light/dark theme support.
 - Live run statistics: iterations, path length, and elapsed time.
+
+## Dynamic Maze Generation
+
+The app includes several dynamic maze/preset generators accessible from the `Presets` controls. Use the Presets buttons to quickly populate the grid with different obstacle patterns:
+
+- `Maze` — Generates a randomized maze layout.
+- `Spiral` — Creates a spiral-shaped barrier.
+- `Fortress` — Builds a central fortress of walls.
+- `Scatter` — Drops randomized blocks while keeping start/end clear.
+
+Presets are implemented in `react-app/src/presets.js` and can be combined with manual editing (click-and-drag) to create challenging scenarios for each algorithm. Try different presets and then run the visualization at maximum speed to compare algorithm behavior.
 
 ## Algorithms Included
 
