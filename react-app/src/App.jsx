@@ -17,6 +17,8 @@ import './App.css';
 
 const algoRunners = { astar: runAStar, dijkstra: runDijkstra, bfs: runBFS, dfs: runDFS, greedy: runGreedy, bidirectional: runBidirectional, jps: runJPS, iddfs: runIDDFS, bestfirst: runBestFirst, thetastar: runThetaStar };
 
+const SPEED_DEFAULT = 50;
+
 function buildGrid(rows, cols) {
   return Array.from({ length: rows }, (_, r) =>
     Array.from({ length: cols }, (_, c) => ({
@@ -50,8 +52,9 @@ export default function App() {
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const [algo, setAlgo] = useState('astar');
   const [mode, setMode] = useState(MODES.NONE);
-  const [speed, setSpeed] = useState(400);
+  const [speed, setSpeed] = useState(SPEED_DEFAULT);
   const [stats, setStats] = useState({ iterations: 0, pathLength: 0, duration: '0.00' });
+  const [isRunActive, setIsRunActive] = useState(false);
   const [_renderTick, setRenderTick] = useState(0);
 
   const cellsRef = useRef([]);
@@ -60,6 +63,8 @@ export default function App() {
   const startRef = useRef(null);
   const endRef = useRef(null);
   const isRunningRef = useRef(false);
+  const hasRunSessionRef = useRef(false);
+  const isPausedRef = useRef(false);
   const abortRef = useRef(false);
   const speedRef = useRef(speed);
   const algoRef = useRef(algo);
@@ -73,8 +78,29 @@ export default function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const getSpeedMs = useCallback(() => Math.max(0, 500 - speedRef.current), []);
-  const delayStep = useCallback(() => new Promise(res => setTimeout(res, getSpeedMs())), [getSpeedMs]);
+  const getSpeedMs = useCallback(() => {
+    return Math.max(0, 101 - speedRef.current);
+  }, []);
+  
+  const delayStep = useCallback(async () => {
+    const wait = ms => new Promise(res => setTimeout(res, ms));
+    while (isPausedRef.current && !abortRef.current) {
+      await wait(30);
+    }
+    let remaining = getSpeedMs();
+    // Yield to browser for rendering every frame
+    await new Promise(resolve => requestAnimationFrame(resolve));
+    while (remaining > 0 && !abortRef.current) {
+      if (isPausedRef.current) {
+        while (isPausedRef.current && !abortRef.current) {
+          await wait(30);
+        }
+      }
+      const step = Math.min(30, remaining);
+      await wait(step);
+      remaining -= step;
+    }
+  }, [getSpeedMs]);
 
   const showStatus = useCallback(() => {}, []);
 
@@ -105,6 +131,14 @@ export default function App() {
     forceRender();
   }, [computeGridSize, forceRender]);
 
+  const resetRunState = useCallback(() => {
+    abortRef.current = true;
+    isRunningRef.current = false;
+    hasRunSessionRef.current = false;
+    isPausedRef.current = false;
+    setIsRunActive(false);
+  }, []);
+
   useEffect(() => { initGrid(); }, [initGrid]);
 
   useEffect(() => {
@@ -133,7 +167,7 @@ export default function App() {
   }, []);
 
   const handleCellInteraction = useCallback((r, c, isDrag = false, button = 0) => {
-    if (isRunningRef.current) return;
+    if (hasRunSessionRef.current) return;
     const cell = cellsRef.current[r][c];
     if (mode === MODES.START) {
       if (cell === startRef.current) { cell.state = 'empty'; cell.visual = ''; startRef.current = null; forceRender(); return; }
@@ -165,9 +199,12 @@ export default function App() {
   }, [mode, forceRender]);
 
   const runAlgorithm = useCallback(async () => {
-    if (isRunningRef.current) return;
+    if (hasRunSessionRef.current) return;
     if (!startRef.current || !endRef.current) { showStatus('Select start and end first.'); return; }
     isRunningRef.current = true;
+    hasRunSessionRef.current = true;
+    isPausedRef.current = false;
+    setIsRunActive(true);
     abortRef.current = false;
     showStatus('Running...', 0);
 
@@ -259,11 +296,29 @@ export default function App() {
       setStats({ iterations: iterationCount, pathLength: 0, duration });
     }
     isRunningRef.current = false;
+    hasRunSessionRef.current = false;
+    isPausedRef.current = false;
+    setIsRunActive(false);
     forceRender();
   }, [getNeighbors, delayStep, showStatus, forceRender]);
 
+  const handleRunToggle = useCallback(() => {
+    if (!hasRunSessionRef.current) {
+      runAlgorithm();
+      return;
+    }
+    isPausedRef.current = !isPausedRef.current;
+    setIsRunActive(!isPausedRef.current);
+    showStatus(isPausedRef.current ? 'Paused' : 'Running...', 0);
+  }, [runAlgorithm, showStatus]);
+
+  const handleReset = useCallback(() => {
+    resetRunState();
+    initGrid();
+  }, [resetRunState, initGrid]);
+
   const applyPreset = useCallback((name) => {
-    if (isRunningRef.current) return;
+    if (hasRunSessionRef.current) return;
     const cells = cellsRef.current;
     const rows = rowsRef.current, cols = colsRef.current;
     for (const row of cells) for (const c of row) {
@@ -303,9 +358,11 @@ export default function App() {
               algo={algo} onAlgoChange={setAlgo}
               mode={mode} onModeChange={setMode}
               speed={speed} onSpeedChange={setSpeed}
+              displaySpeed={speed}
               theme={theme} onThemeToggle={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
-              onRun={runAlgorithm} onReset={initGrid}
+              onRun={handleRunToggle} onReset={handleReset}
               onPreset={applyPreset}
+              isRunning={isRunActive}
             />
           </div>
           <div className="header-center">

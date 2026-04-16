@@ -195,6 +195,12 @@ hr { display:none; }
 }
 .action-btn:disabled { opacity:.4; cursor:not-allowed; pointer-events:none; }
 
+/* Keep the run button a consistent size regardless of label */
+.action-btn.run-btn {
+  min-width: 92px;
+  display:inline-flex; justify-content:center; padding: 0 12px;
+}
+
 /* ── Select / Slider groups ── */
 .algo-group, .slider-group {
   display:flex; align-items:center; gap:8px;
@@ -260,7 +266,13 @@ hr { display:none; }
   cursor:pointer;
 }
 #speed::-moz-range-track { background: var(--border); height:4px; border-radius:2px; border:none; }
-#speed-val { display:none; }
+#speed-val {
+  min-width: 32px;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .74rem;
+  color: var(--text-secondary);
+}
 
 /* ── Theme toggle switch ── */
 .theme-switch {

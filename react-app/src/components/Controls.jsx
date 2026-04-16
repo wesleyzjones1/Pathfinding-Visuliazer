@@ -1,6 +1,6 @@
 import { ALGORITHMS, MODES, PRESETS } from '../constants';
 
-export default function Controls({ algo, onAlgoChange, mode, onModeChange, speed, onSpeedChange, theme, onThemeToggle, onRun, onReset, onPreset }) {
+export default function Controls({ algo, onAlgoChange, mode, onModeChange, speed, onSpeedChange, displaySpeed, theme, onThemeToggle, onRun, onReset, onPreset, isRunning }) {
   return (
     <>
       <div className="controls-row">
@@ -21,11 +21,11 @@ export default function Controls({ algo, onAlgoChange, mode, onModeChange, speed
         </div>
       </div>
       <div className="controls-row">
-        <button className="action-btn run-btn" onClick={onRun}>&#9654; Run</button>
+        <button className="action-btn run-btn" onClick={onRun}>{isRunning ? '\u23F8 Stop' : '\u25B6 Run'}</button>
         <button className="action-btn secondary" onClick={onReset}>&#8635; Reset</button>
         <div className="slider-group">
           <label className="slider-label">Speed</label>
-          <input id="speed" type="range" min="1" max="500" step="1" value={speed} onChange={e => onSpeedChange(Number(e.target.value))} />
+          <input id="speed" type="range" min="1" max="100" step="1" value={speed} onChange={e => onSpeedChange(Number(e.target.value))} />
         </div>
         <label className="theme-switch" title="Toggle light/dark mode">
           <input type="checkbox" checked={theme === 'dark'} onChange={onThemeToggle} />

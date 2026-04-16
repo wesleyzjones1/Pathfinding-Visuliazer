@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+react-app/dist/
+*.tsbuildinfo
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.log
+
+# OS files
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temp files
+*.tmp
+.cache/
