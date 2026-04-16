@@ -1,5 +1,5 @@
-import { runIDDFS } from '../algorithms/iddfs.js';
-import { runBFS } from '../algorithms/bfs.js';
+import { runIDDFS } from '../react-app/src/algorithms/iddfs.js';
+import { runBFS } from '../react-app/src/algorithms/bfs.js';
 
 async function runTest(gridRows, gridCols, walls, startPos, endPos){
   // build cells like in app.js

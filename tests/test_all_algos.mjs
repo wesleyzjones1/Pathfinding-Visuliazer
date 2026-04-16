@@ -1,14 +1,14 @@
 // Comprehensive test for all pathfinding algorithms
-import { runAStar } from '../algorithms/astar.js';
-import { runDijkstra } from '../algorithms/dijkstra.js';
-import { runBFS } from '../algorithms/bfs.js';
-import { runDFS } from '../algorithms/dfs.js';
-import { runGreedy } from '../algorithms/greedy.js';
-import { runBidirectional } from '../algorithms/bidirectional.js';
-import { runJPS } from '../algorithms/jumppointsearch.js';
-import { runIDDFS } from '../algorithms/iddfs.js';
-import { runBestFirst } from '../algorithms/bestfirst.js';
-import { runThetaStar } from '../algorithms/thetastar.js';
+import { runAStar } from '../react-app/src/algorithms/astar.js';
+import { runDijkstra } from '../react-app/src/algorithms/dijkstra.js';
+import { runBFS } from '../react-app/src/algorithms/bfs.js';
+import { runDFS } from '../react-app/src/algorithms/dfs.js';
+import { runGreedy } from '../react-app/src/algorithms/greedy.js';
+import { runBidirectional } from '../react-app/src/algorithms/bidirectional.js';
+import { runJPS } from '../react-app/src/algorithms/jumppointsearch.js';
+import { runIDDFS } from '../react-app/src/algorithms/iddfs.js';
+import { runBestFirst } from '../react-app/src/algorithms/bestfirst.js';
+import { runThetaStar } from '../react-app/src/algorithms/thetastar.js';
 
 // Build a simple grid
 function makeGrid(rows, cols, walls) {
