@@ -1,120 +1,131 @@
 ﻿# Pathfinding Visualizer
 
-An interactive pathfinding visualizer built with React and Vite.
-Design mazes, place start/end nodes, and compare multiple search algorithms step-by-step with live statistics.
+> An interactive, browser-based tool for visualizing and comparing classic pathfinding algorithms on a live grid.
 
-## Demo
+Draw walls, place a start and end node, choose an algorithm, and watch it search in real time — then see the shortest path traced back. Built with React and Vite, with zero backend required.
 
-Add your deployed URL here:
+---
 
-`https://your-demo-url-here`
+## Live Demo
+
+> _Deploy to GitHub Pages and replace this line with your URL._
+
+---
 
 ## Screenshots
 
-Here are a few screenshots from the app (also available in the `photos/` folder):
+| A\* on open grid | A\* through a maze | Greedy search |
+|---|---|---|
+| ![A*](photos/aStar.png) | ![A* Maze](photos/aStarMaze.png) | ![Greedy](photos/greedySearch.png) |
 
-![Main UI](photos/aStar.png)
-![Maze Preset](photos/aStarMaze.png)
-![Algorithm Running](photos/aStarSearchMaze.png)
-![Greedy Search Example](photos/greedySearch.png)
-![Theta* Spiral](photos/thetaSpiral.png)
+| Algorithm running | Theta\* spiral | Greedy spiral |
+|---|---|---|
+| ![Running](photos/aStarSearchMaze.png) | ![Theta* Spiral](photos/thetaSpiral.png) | ![Greedy Spiral](photos/greedySpiral.png) |
+
+---
 
 ## Features
 
-- Interactive grid editing for walls, start node, and end node.
-- Click-and-drag draw/erase behavior for fast map setup.
-- Multiple algorithms with visual exploration and final path animation.
-- Adjustable visualization speed and algorithm-specific descriptions.
-- Preset generators (maze, spiral, fortress, scatter).
-- Light/dark theme support.
-- Live run statistics: iterations, path length, and elapsed time.
+- **10 algorithms** — each with real-time step-by-step visualization
+- **Click and drag** to draw or erase walls; right-click to erase
+- **Place start & end nodes** anywhere on the grid
+- **Adjustable speed** — from slow step-through to instant completion
+- **Live stats** — iteration count, path length, and elapsed time update as the algorithm runs
+- **Dynamic preset generators** — instantly populate the grid with mazes, spirals, fortresses, and more
+- **Light / dark theme** toggle
+- **Fully responsive** — grid resizes to fit your browser window
+
+---
+
+## Algorithms
+
+| Algorithm | Optimal path | Strategy |
+|---|---|---|
+| A\* | ✅ | Heuristic + cost (best all-around) |
+| Dijkstra | ✅ | Uniform cost, no heuristic |
+| Breadth-First Search | ✅ | Explores layer by layer |
+| Depth-First Search | ❌ | Explores deep before wide |
+| Greedy Best-First | ❌ | Heuristic only, very fast |
+| Bidirectional | ✅ | Searches from both ends simultaneously |
+| Jump Point Search | ✅ | Optimised A\* for uniform grids |
+| IDDFS | ✅ | Iterative deepening DFS |
+| Best-First Search | ❌ | Greedy variant |
+| Theta\* | ✅ (any-angle) | Smooth any-angle paths over grid |
+
+---
 
 ## Dynamic Maze Generation
 
-The app includes several dynamic maze/preset generators accessible from the `Presets` controls. Use the Presets buttons to quickly populate the grid with different obstacle patterns:
+Click any **Preset** button to instantly fill the grid with a procedurally generated obstacle layout:
 
-- `Maze` — Generates a randomized maze layout.
-- `Spiral` — Creates a spiral-shaped barrier.
-- `Fortress` — Builds a central fortress of walls.
-- `Scatter` — Drops randomized blocks while keeping start/end clear.
+| Preset | Description |
+|---|---|
+| **Maze** | Randomised maze with guaranteed passages |
+| **Spiral** | A tightening spiral wall from the centre outward |
+| **Fortress** | A walled enclosure around the end node |
+| **Scatter** | Randomly scattered wall clusters |
 
-Presets are implemented in `react-app/src/presets.js` and can be combined with manual editing (click-and-drag) to create challenging scenarios for each algorithm. Try different presets and then run the visualization at maximum speed to compare algorithm behavior.
+Presets can be combined with manual wall editing to build custom scenarios. Try running the same preset with different algorithms to compare how each one explores and what path it finds.
 
-## Algorithms Included
-
-- A*
-- Dijkstra
-- Breadth-First Search (BFS)
-- Depth-First Search (DFS)
-- Greedy Best-First Search
-- Bidirectional Search
-- Jump Point Search (JPS)
-- Iterative Deepening DFS (IDDFS)
-- Best-First Search
-- Theta*
+---
 
 ## Tech Stack
 
-- React
-- Vite
-- JavaScript (ESM)
-- CSS
-- Node.js test scripts
+| Layer | Technology |
+|---|---|
+| UI Framework | React 18 |
+| Build Tool | Vite |
+| Language | JavaScript (ESM) |
+| Styling | CSS with custom properties |
+| Tests | Node.js ESM scripts |
+
+---
 
 ## Project Structure
 
-```text
-Astar/
-├─ react-app/
-│  ├─ src/
-│  │  ├─ algorithms/
-│  │  ├─ components/
-│  │  ├─ App.jsx
-│  │  ├─ App.css
-│  │  ├─ constants.js
-│  │  └─ presets.js
-│  ├─ package.json
-│  └─ vite.config.js
-├─ tests/
-│  ├─ test_all_algos.mjs
-│  └─ test_iddfs_node.mjs
-└─ README.md
 ```
+Astar/
+├── react-app/
+│   ├── src/
+│   │   ├── algorithms/       # One file per algorithm
+│   │   ├── components/       # Grid, Cell, Controls
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── constants.js
+│   │   └── presets.js        # Maze generation logic
+│   ├── package.json
+│   └── vite.config.js
+├── tests/
+│   ├── test_all_algos.mjs    # 40-case test suite
+│   └── test_iddfs_node.mjs
+├── photos/                   # App screenshots
+└── README.md
+```
+
+---
 
 ## Getting Started
 
-### 1. Install Dependencies
+**Install and run in two steps:**
 
 ```bash
 cd react-app
 npm install
-```
-
-### 2. Run Development Server
-
-```bash
 npm run dev
 ```
 
-Open the local URL shown in the terminal (usually `http://localhost:5173` or next available port).
+Open the URL shown in the terminal (typically `http://localhost:5173`).
 
-### 3. Build for Production
+### Other commands
 
 ```bash
+# Production build
 npm run build
-```
 
-### 4. Preview Production Build
-
-```bash
+# Preview production build locally
 npm run preview
-```
 
-## Test Commands
-
-Run from repository root:
-
-```bash
+# Run algorithm tests (from repository root)
 node tests/test_all_algos.mjs
 node tests/test_iddfs_node.mjs
 ```
