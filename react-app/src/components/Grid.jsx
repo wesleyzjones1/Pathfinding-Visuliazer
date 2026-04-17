@@ -2,6 +2,8 @@ import { useEffect, useCallback } from 'react';
 import { CELL_SIZE, MODES } from '../constants';
 import Cell from './Cell';
 
+const PRIMARY_BUTTON = 0;
+
 export default function Grid({ cells, rows, cols, cellSize = CELL_SIZE, algo, onCellInteraction, mouseRef, mode }) {
   useEffect(() => {
     const up = () => { mouseRef.current.down = false; };
@@ -34,9 +36,12 @@ export default function Grid({ cells, rows, cols, cellSize = CELL_SIZE, algo, on
           cell={cell}
           algo={algo}
           onPointerDown={(e) => {
+            // Prevent page scroll/text-selection while drawing walls on touch screens.
             if (e.pointerType === 'touch') e.preventDefault();
             mouseRef.current.down = true;
-            const button = typeof e.button === 'number' && e.button >= 0 ? e.button : 0;
+            // Touch pointers may not provide a mouse-style button value; default to primary (0),
+            // which is equivalent to normal draw interaction and still keeps right-click erase on desktop.
+            const button = typeof e.button === 'number' && e.button >= 0 ? e.button : PRIMARY_BUTTON;
             mouseRef.current.button = button;
             // set dragMode based on initial cell state so dragging can erase if started on a built cell
             if (mode === MODES.WALL) {

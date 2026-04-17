@@ -366,7 +366,7 @@ main#app { flex:1; }
   justify-content:center;
   padding:12px;
   overflow: auto;
-  touch-action: none;
+  touch-action: manipulation;
 }
 
 .cell {
@@ -460,7 +460,7 @@ main#app { animation: fadeSlideDown .5s ease .12s both; }
 }
 .preset-btn:active { transform:scale(.96); }
 
-@media (max-width:760px) {
+@media (max-width:768px) {
   #title { font-size:1.15rem; }
   .controls-row { flex-direction:row; align-items:center; gap:6px; }
   .ctrl-btn, .action-btn, .algo-group, .slider-group, .preset-btn { width:auto; min-width:0; }
