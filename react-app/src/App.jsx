@@ -18,6 +18,15 @@ import './App.css';
 const algoRunners = { astar: runAStar, dijkstra: runDijkstra, bfs: runBFS, dfs: runDFS, greedy: runGreedy, bidirectional: runBidirectional, jps: runJPS, iddfs: runIDDFS, bestfirst: runBestFirst, thetastar: runThetaStar };
 
 const SPEED_DEFAULT = 50;
+const GRID_TOTAL_HORIZONTAL_MARGIN = 16;
+const GRID_BOTTOM_MARGIN = 12;
+
+function getCellSizeForWidth(width) {
+  // Breakpoints here are intentionally aligned with App.css media queries (430px and 768px).
+  if (width <= 430) return 24;
+  if (width <= 768) return 30;
+  return CELL_SIZE;
+}
 
 function buildGrid(rows, cols) {
   return Array.from({ length: rows }, (_, r) =>
@@ -56,6 +65,10 @@ export default function App() {
   const [stats, setStats] = useState({ iterations: 0, pathLength: 0, duration: '0.00' });
   const [isRunActive, setIsRunActive] = useState(false);
   const [_renderTick, setRenderTick] = useState(0);
+  const [cellSize, setCellSize] = useState(() => {
+    if (typeof window === 'undefined') return CELL_SIZE;
+    return getCellSizeForWidth(window.innerWidth);
+  });
 
   const cellsRef = useRef([]);
   const rowsRef = useRef(0);
@@ -104,27 +117,34 @@ export default function App() {
 
   const showStatus = useCallback(() => {}, []);
 
+  const getResponsiveCellSize = useCallback(() => getCellSizeForWidth(window.innerWidth), []);
+
   const computeGridSize = useCallback(() => {
+    const size = getResponsiveCellSize();
     const controlsH = document.getElementById('controls-section')?.offsetHeight || 180;
-    const availW = window.innerWidth - 24;
-    const availH = window.innerHeight - controlsH - 24;
+    // 16px horizontal margin prevents the grid from touching viewport edges.
+    const availW = window.innerWidth - GRID_TOTAL_HORIZONTAL_MARGIN;
+    // 12px vertical margin keeps visual breathing room under the controls.
+    const availH = window.innerHeight - controlsH - GRID_BOTTOM_MARGIN;
     const toOddAtLeast3 = (value) => {
       const base = Math.max(3, Math.floor(value));
       return base % 2 === 0 ? base - 1 : base;
     };
     return {
-      cols: toOddAtLeast3(availW / CELL_SIZE),
-      rows: toOddAtLeast3(availH / CELL_SIZE),
+      cols: toOddAtLeast3(availW / size),
+      rows: toOddAtLeast3(availH / size),
+      cellSize: size,
     };
-  }, []);
+  }, [getResponsiveCellSize]);
 
   const forceRender = useCallback(() => setRenderTick(k => k + 1), []);
 
   const initGrid = useCallback(() => {
-    const { rows, cols } = computeGridSize();
+    const { rows, cols, cellSize: nextCellSize } = computeGridSize();
     rowsRef.current = rows;
     colsRef.current = cols;
     cellsRef.current = buildGrid(rows, cols);
+    setCellSize(nextCellSize);
     startRef.current = null;
     endRef.current = null;
     setStats({ iterations: 0, pathLength: 0, duration: '0.00' });
@@ -389,6 +409,7 @@ export default function App() {
           cells={cellsRef.current}
           rows={rowsRef.current}
           cols={colsRef.current}
+          cellSize={cellSize}
           algo={algo}
           onCellInteraction={handleCellInteraction}
           mouseRef={mouseRef}

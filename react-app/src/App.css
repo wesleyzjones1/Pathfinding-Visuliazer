@@ -365,10 +365,12 @@ main#app { flex:1; }
   align-content:start;
   justify-content:center;
   padding:12px;
+  overflow: auto;
+  touch-action: manipulation;
 }
 
 .cell {
-  width:40px; height:40px;
+  width: var(--cell-size, 40px); height: var(--cell-size, 40px);
   border: 1px solid var(--cell-border);
   position:relative;
   font-size:.6rem; font-weight:600;
@@ -458,9 +460,27 @@ main#app { animation: fadeSlideDown .5s ease .12s both; }
 }
 .preset-btn:active { transform:scale(.96); }
 
-@media (max-width:760px) {
+@media (max-width:768px) {
   #title { font-size:1.15rem; }
-  .controls-row { flex-direction:column; align-items:stretch; }
-  .ctrl-btn, .action-btn, .algo-group, .slider-group, .preset-btn { width:100%; justify-content:center; }
-  #algo-desc, #stats { min-width:auto; }
+  .controls-row { flex-direction:row; align-items:center; gap:6px; }
+  .ctrl-btn, .action-btn, .algo-group, .slider-group, .preset-btn { width:auto; min-width:0; }
+  .ctrl-btn, .action-btn, .preset-btn { flex:1 1 calc(50% - 6px); justify-content:center; }
+  .algo-group, .slider-group { flex:1 1 100%; }
+  .theme-switch { margin-left:0; }
+  .preset-label { width:100%; }
+  .header-right { width:100%; }
+  #algo-desc, #stats { min-width:auto; width:100%; }
+}
+
+@media (max-width:430px) {
+  #controls-section { padding: 10px 12px; }
+  .header-grid { gap:10px; }
+  #title { font-size:1.05rem; }
+  .ctrl-btn, .action-btn, .algo-group, .slider-group, .preset-btn { height:32px; font-size:.78rem; }
+  .algo-label, .slider-label, .preset-label { font-size:.68rem; }
+  #algo-desc { display:none; }
+  #stats { padding:8px 10px; }
+  #stats h3 { margin-bottom:6px; padding-bottom:4px; }
+  .stat-row { padding:1px 0; }
+  #speed { width:100%; }
 }
