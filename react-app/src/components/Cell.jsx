@@ -1,4 +1,4 @@
-export default function Cell({ cell, algo, onMouseDown, onMouseEnter, onClick }) {
+export default function Cell({ cell, algo, onPointerDown, onPointerEnter, onClick }) {
   const vis = cell.visual;
   let className = 'cell';
   if (vis === 'start') className += ' start fill';
@@ -20,8 +20,8 @@ export default function Cell({ cell, algo, onMouseDown, onMouseEnter, onClick })
     <div
       className={className}
       style={bgColor ? { backgroundColor: bgColor } : undefined}
-      onMouseDown={onMouseDown}
-      onMouseEnter={onMouseEnter}
+      onPointerDown={onPointerDown}
+      onPointerEnter={onPointerEnter}
       onClick={onClick}
     >
       <div className="circle" style={{ backgroundColor: circleColor }} />

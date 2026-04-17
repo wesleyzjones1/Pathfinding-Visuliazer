@@ -2,11 +2,15 @@ import { useEffect, useCallback } from 'react';
 import { CELL_SIZE, MODES } from '../constants';
 import Cell from './Cell';
 
-export default function Grid({ cells, rows, cols, algo, onCellInteraction, mouseRef, mode }) {
+export default function Grid({ cells, rows, cols, cellSize = CELL_SIZE, algo, onCellInteraction, mouseRef, mode }) {
   useEffect(() => {
     const up = () => { mouseRef.current.down = false; };
-    window.addEventListener('mouseup', up);
-    return () => window.removeEventListener('mouseup', up);
+    window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+    return () => {
+      window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
+    };
   }, [mouseRef]);
 
   const onContextMenu = useCallback(e => e.preventDefault(), []);
@@ -17,7 +21,11 @@ export default function Grid({ cells, rows, cols, algo, onCellInteraction, mouse
     <div
       id="grid"
       className="grid"
-      style={{ gridTemplateColumns: `repeat(${cols}, ${CELL_SIZE}px)`, gridTemplateRows: `repeat(${rows}, ${CELL_SIZE}px)` }}
+      style={{
+        gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
+        gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
+        '--cell-size': `${cellSize}px`,
+      }}
       onContextMenu={onContextMenu}
     >
       {cells.flat().map(cell => (
@@ -25,9 +33,11 @@ export default function Grid({ cells, rows, cols, algo, onCellInteraction, mouse
           key={`${cell.r}-${cell.c}`}
           cell={cell}
           algo={algo}
-          onMouseDown={(e) => {
+          onPointerDown={(e) => {
+            if (e.pointerType === 'touch') e.preventDefault();
             mouseRef.current.down = true;
-            mouseRef.current.button = e.button;
+            const button = typeof e.button === 'number' && e.button >= 0 ? e.button : 0;
+            mouseRef.current.button = button;
             // set dragMode based on initial cell state so dragging can erase if started on a built cell
             if (mode === MODES.WALL) {
               mouseRef.current.dragMode = (cell.state === 'wall') ? 'erase' : 'draw';
@@ -37,11 +47,11 @@ export default function Grid({ cells, rows, cols, algo, onCellInteraction, mouse
               mouseRef.current.dragMode = (cell.state === 'end') ? 'erase' : 'draw';
             }
             // treat the initial mousedown as a drag action so the clicked cell is updated immediately
-            onCellInteraction(cell.r, cell.c, true, e.button);
+            onCellInteraction(cell.r, cell.c, true, button);
             // prevent the subsequent click event from toggling the same cell
             mouseRef.current.suppressNextClick = `${cell.r}-${cell.c}`;
           }}
-          onMouseEnter={() => {
+          onPointerEnter={() => {
             if (mouseRef.current.down && mode === MODES.WALL) {
               onCellInteraction(cell.r, cell.c, true, mouseRef.current.button);
             }

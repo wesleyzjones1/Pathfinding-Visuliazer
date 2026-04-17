@@ -56,6 +56,12 @@ export default function App() {
   const [stats, setStats] = useState({ iterations: 0, pathLength: 0, duration: '0.00' });
   const [isRunActive, setIsRunActive] = useState(false);
   const [_renderTick, setRenderTick] = useState(0);
+  const [cellSize, setCellSize] = useState(() => {
+    if (typeof window === 'undefined') return CELL_SIZE;
+    if (window.innerWidth <= 430) return 24;
+    if (window.innerWidth <= 768) return 30;
+    return CELL_SIZE;
+  });
 
   const cellsRef = useRef([]);
   const rowsRef = useRef(0);
@@ -104,27 +110,36 @@ export default function App() {
 
   const showStatus = useCallback(() => {}, []);
 
+  const getResponsiveCellSize = useCallback(() => {
+    if (window.innerWidth <= 430) return 24;
+    if (window.innerWidth <= 768) return 30;
+    return CELL_SIZE;
+  }, []);
+
   const computeGridSize = useCallback(() => {
+    const size = getResponsiveCellSize();
     const controlsH = document.getElementById('controls-section')?.offsetHeight || 180;
-    const availW = window.innerWidth - 24;
-    const availH = window.innerHeight - controlsH - 24;
+    const availW = window.innerWidth - 16;
+    const availH = window.innerHeight - controlsH - 12;
     const toOddAtLeast3 = (value) => {
       const base = Math.max(3, Math.floor(value));
       return base % 2 === 0 ? base - 1 : base;
     };
     return {
-      cols: toOddAtLeast3(availW / CELL_SIZE),
-      rows: toOddAtLeast3(availH / CELL_SIZE),
+      cols: toOddAtLeast3(availW / size),
+      rows: toOddAtLeast3(availH / size),
+      cellSize: size,
     };
-  }, []);
+  }, [getResponsiveCellSize]);
 
   const forceRender = useCallback(() => setRenderTick(k => k + 1), []);
 
   const initGrid = useCallback(() => {
-    const { rows, cols } = computeGridSize();
+    const { rows, cols, cellSize: nextCellSize } = computeGridSize();
     rowsRef.current = rows;
     colsRef.current = cols;
     cellsRef.current = buildGrid(rows, cols);
+    setCellSize(nextCellSize);
     startRef.current = null;
     endRef.current = null;
     setStats({ iterations: 0, pathLength: 0, duration: '0.00' });
@@ -389,6 +404,7 @@ export default function App() {
           cells={cellsRef.current}
           rows={rowsRef.current}
           cols={colsRef.current}
+          cellSize={cellSize}
           algo={algo}
           onCellInteraction={handleCellInteraction}
           mouseRef={mouseRef}
